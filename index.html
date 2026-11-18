@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IB 포털 | 기업금융 서비스 소개 & 자금조달 학습</title>
+<meta name="description" content="기업금융(IB) 서비스 소개와 자금조달 학습 포털. IPO·유상증자·회사채·CP 비교, IPO 절차, PF 구조, 계산기 제공.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap">
+<style>
+:root{
+  /* 우리 부서 포털 디자인 시스템 토큰 (tokens.json과 같은 값) */
+  color-scheme:light;
+  --surface:#ffffff;
+  --surface-alt:#f4f7fc;
+  --surface-section:#f5f8fd;
+  --surface-hero:#eaf0fc;
+  --primary:#0f2a5c;
+  --primary-deep:#0a1f45;
+  --accent:#2457d6;
+  --accent-soft:#dce6fb;
+  --accent-tint:rgba(36,87,214,.08);
+  --ink:#1c2433;
+  --ink-muted:#5a6577;
+  --line:rgba(36,87,214,.18);
+  --line-soft:rgba(36,87,214,.16);
+  --on-accent:#ffffff;
+  --on-primary:#ffffff;
+  --on-primary-muted:#b7c6e8;
+  --placeholder:#8a94a6;
+  --error:#c0262d;
+  --space-1:8px;
+  --space-2:12px;
+  --space-3:14px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:26px;
+  --space-7:34px;
+  --space-section-sm:64px;
+  --space-section:84px;
+  --space-hero:96px;
+  --header-height:64px;
+  --content-width:1120px;
+  --radius-sm:8px;
+  --radius-md:10px;
+  --radius-lg:12px;
+  --radius-xl:14px;
+  --radius-pill:999px;
+  --shadow-card:0 1px 2px rgba(15,42,92,.06), 0 8px 24px rgba(15,42,92,.07);
+  --shadow-raise:0 6px 20px rgba(15,42,92,.16);
+  --font-sans:'Nanum Gothic', '나눔고딕', 'NanumGothic', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+  /* 원본 레이아웃의 반투명 면을 위한 보조값 */
+  --a-rgb:36,87,214;--p-rgb:36,87,214;--glow-rgb:36,87,214;--base-rgb:255,255,255;--surf-rgb:255,255,255;--tint-rgb:15,42,92;
+  --fill-primary:var(--primary);--fill-primary-deep:var(--primary-deep);
+  --page-bg:linear-gradient(180deg,var(--surface) 0%,var(--surface-alt) 40%,var(--surface) 100%);
+  --footer-bg:var(--surface);
+  --hero-bg:radial-gradient(900px 400px at 50% -10%,rgba(36,87,214,.18),transparent 70%),radial-gradient(600px 300px at 90% 100%,rgba(36,87,214,.08),transparent 70%),linear-gradient(180deg,#eaf0fc,#ffffff);
+}
+
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-height) + 12px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{
+  margin:0;color:var(--ink);line-height:1.7;font-size:16px;
+  font-family:var(--font-sans);
+  background:var(--page-bg);
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4,p,li,td,th,button,label,summary{word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.wrap{max-width:var(--content-width);margin:0 auto;padding:0 var(--space-5)}
+
+/* ---------- Header / Nav ---------- */
+.site-header{
+  position:sticky;top:0;z-index:100;height:var(--header-height);
+  background:rgba(var(--base-rgb),.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:100%;gap:16px}
+.brand{font-weight:800;letter-spacing:.08em;color:var(--primary);text-decoration:none;white-space:nowrap;font-size:1.1rem}
+.brand span{color:var(--ink);font-weight:400;margin-left:6px;font-size:.8rem;letter-spacing:.02em;opacity:.7}
+.nav{display:flex;gap:2px;align-items:center}
+.nav a{
+  text-decoration:none;color:var(--ink-muted);font-size:.9rem;padding:8px 10px;border-radius:var(--radius-sm);white-space:nowrap;
+  transition:color .2s,background .2s;
+}
+.nav a:hover{color:var(--primary);background:var(--accent-tint)}
+.nav a.active{color:var(--on-accent);background:var(--accent);font-weight:700}
+.menu-btn{
+  font-family:inherit;display:none;background:transparent;border:1px solid var(--line);color:var(--primary);
+  width:44px;height:44px;border-radius:var(--radius-md);cursor:pointer;padding:0;flex:none;
+}
+.menu-btn:hover{background:var(--accent-tint);border-color:var(--accent)}
+.menu-btn .bars{position:relative;display:block;width:20px;height:14px;margin:0 auto}
+.menu-btn .bars i{position:absolute;left:0;width:100%;height:2px;border-radius:2px;background:currentColor;transition:transform .2s,opacity .2s,top .2s}
+.menu-btn .bars i:nth-child(1){top:0}
+.menu-btn .bars i:nth-child(2){top:6px}
+.menu-btn .bars i:nth-child(3){top:12px}
+.menu-btn[aria-expanded="true"] .bars i:nth-child(1){top:6px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars i:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] .bars i:nth-child(3){top:6px;transform:rotate(-45deg)}
+@media (max-width:980px){
+  .menu-btn{display:block}
+  .nav{
+    position:absolute;top:var(--header-height);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:rgba(var(--base-rgb),.98);border-bottom:1px solid var(--line);padding:8px 12px 14px;
+    display:none;max-height:calc(100vh - var(--header-height));overflow:auto;
+  }
+  .nav.open{display:flex}
+  .nav a{padding:13px 12px;font-size:1rem;border-radius:var(--radius-sm)}
+  .nav a.active{position:relative;padding-left:20px}
+  .nav a.active::before{content:"";position:absolute;left:9px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:var(--on-accent)}
+  .nav{box-shadow:var(--shadow-raise)}
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;padding:var(--space-hero) 0 var(--space-section);text-align:center;overflow:hidden;
+  background:var(--hero-bg);
+}
+.hero .eyebrow{color:var(--accent);letter-spacing:.3em;font-size:.8rem;margin:0 0 14px}
+.hero h1{margin:0;font-size:clamp(2.4rem,7vw,4.2rem);letter-spacing:.06em;color:var(--primary);line-height:1.15}
+.hero h1 small{display:block;font-size:.36em;letter-spacing:.2em;color:var(--ink);opacity:.8;margin-top:12px;font-weight:400}
+.hero p.lead{margin:22px auto 30px;max-width:640px;color:var(--ink);font-size:clamp(1rem,2.4vw,1.2rem);opacity:.92}
+.btn{
+  display:inline-block;border:1px solid var(--accent);color:var(--primary);background:transparent;
+  padding:12px 26px;border-radius:var(--radius-pill);text-decoration:none;font-size:.95rem;cursor:pointer;
+  font-family:inherit;transition:background .2s,color .2s;
+}
+.btn:hover{background:var(--accent);color:var(--on-accent)}
+.btn.solid{background:var(--accent);color:var(--on-accent);font-weight:700}
+.btn.solid:hover{background:var(--primary)}
+.hero-line{width:64px;height:2px;background:var(--accent);margin:0 auto 22px}
+
+/* ---------- Sections ---------- */
+section.block{padding:var(--space-section) 0}
+section.block:nth-of-type(even){background:var(--surface-section)}
+.sec-head{margin-bottom:var(--space-7)}
+.sec-head .tag{color:var(--accent);font-size:.78rem;letter-spacing:.28em}
+.sec-head h2{margin:6px 0 8px;font-size:clamp(1.6rem,4vw,2.2rem);color:var(--primary);line-height:1.3}
+.sec-head h2::after{content:"";display:block;width:48px;height:2px;background:var(--accent);margin-top:12px}
+.sec-head p{margin:0;color:var(--ink-muted);max-width:720px}
+.note{font-size:.84rem;color:var(--ink-muted)}
+
+.card{
+  background:var(--surface);box-shadow:var(--shadow-card);
+  border:1px solid var(--line);border-radius:var(--radius-xl);padding:var(--space-6);
+}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+@media (max-width:860px){.grid3{grid-template-columns:1fr}}
+
+/* business cards */
+.biz .icon{
+  width:46px;height:46px;border-radius:var(--radius-lg);display:grid;place-items:center;
+  border:1px solid var(--accent);color:var(--primary);font-weight:800;margin-bottom:14px;font-size:.9rem;letter-spacing:.04em;
+}
+.biz h3{margin:0 0 4px;font-size:1.2rem;color:var(--primary)}
+.biz .sub{color:var(--ink-muted);font-size:.9rem;margin:0 0 14px}
+ul.dots{list-style:none;margin:0;padding:0}
+ul.dots li{position:relative;padding-left:1.1em;margin:7px 0;font-size:.95rem}
+ul.dots li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;background:var(--accent);border-radius:50%}
+
+/* table */
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-xl);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:760px;background:rgba(var(--surf-rgb),.8)}
+table.cmp th,table.cmp td{padding:15px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-soft);font-size:.93rem}
+table.cmp thead th{background:var(--fill-primary);color:var(--on-primary);font-size:.88rem;letter-spacing:.04em;white-space:nowrap}
+table.cmp tbody th{color:var(--primary);white-space:nowrap;background:rgba(var(--p-rgb),.25)}
+table.cmp tbody tr:hover td{background:rgba(var(--a-rgb),.05)}
+table.cmp tr:last-child th,table.cmp tr:last-child td{border-bottom:0}
+.pill{display:inline-block;padding:2px 10px;border-radius:var(--radius-pill);border:1px solid var(--line);font-size:.78rem;color:var(--primary);white-space:nowrap}
+
+/* timeline */
+ol.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5);counter-reset:s}
+ol.timeline li{position:relative;padding:26px 22px 22px;counter-increment:s}
+ol.timeline li::before{
+  content:counter(s);position:absolute;top:-16px;left:20px;width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;background:var(--accent);color:var(--on-accent);font-weight:800;
+}
+ol.timeline h3{margin:6px 0 8px;font-size:1.05rem;color:var(--primary)}
+ol.timeline p{margin:0;color:var(--ink);opacity:.88;font-size:.92rem}
+ol.timeline .dur{display:inline-block;margin-top:12px}
+@media (max-width:860px){
+  ol.timeline{grid-template-columns:1fr;gap:26px;padding-left:18px;border-left:2px solid var(--line);margin-left:6px}
+  ol.timeline li::before{left:-37px;top:20px}
+}
+
+/* PF diagram */
+.pf-grid{
+  display:grid;grid-template-columns:1fr 92px 1fr 92px 1fr;grid-auto-rows:auto;gap:8px;align-items:center;
+}
+.pf-node{
+  border:1px solid var(--accent);background:linear-gradient(160deg,var(--fill-primary),var(--fill-primary-deep));
+  color:var(--on-primary);border-radius:var(--radius-xl);padding:16px 10px;text-align:center;cursor:pointer;
+  font-family:inherit;font-size:1rem;font-weight:700;transition:transform .15s,box-shadow .2s,background .2s;
+}
+.pf-node small{display:block;font-weight:400;color:var(--on-primary-muted);font-size:.78rem;margin-top:2px}
+.pf-node:hover{transform:translateY(-2px);box-shadow:var(--shadow-raise)}
+.pf-node[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);box-shadow:0 0 0 3px rgba(var(--a-rgb),.3)}
+.pf-node[aria-pressed="true"] small{color:var(--accent-soft)}
+.arrow{text-align:center;color:var(--accent);font-size:.7rem;line-height:1.3}
+.arrow b{display:block;font-size:1.5rem;line-height:1}
+.arrow .av{display:none}
+.pf-detail{margin-top:26px;min-height:150px}
+.pf-detail h3{margin:0 0 6px;color:var(--primary)}
+.pf-detail .hint{color:var(--ink-muted)}
+.pf-detail dl{margin:12px 0 0;display:grid;grid-template-columns:110px 1fr;gap:8px 14px}
+.pf-detail dt{color:var(--accent);font-size:.88rem}
+.pf-detail dd{margin:0;font-size:.95rem}
+@media (max-width:760px){
+  .pf-grid{grid-template-columns:1fr;gap:4px}
+  .pf-grid > *{grid-column:1 !important;grid-row:auto !important}
+  .arrow .ah{display:none}.arrow .av{display:block}
+  .arrow{padding:2px 0}
+  .pf-order-1{order:1}.pf-order-2{order:2}.pf-order-3{order:3}.pf-order-4{order:4}.pf-order-5{order:5}.pf-order-6{order:6}.pf-order-7{order:7}.pf-order-8{order:8}.pf-order-9{order:9}
+  .pf-detail dl{grid-template-columns:1fr}
+}
+
+/* track record */
+.filters{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin-bottom:22px}
+.filters label{font-size:.85rem;color:var(--ink-muted);margin-right:8px}
+select,input[type=text],input[type=search],input[type=number]{
+  font-family:inherit;font-size:1rem;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius-md);padding:10px 12px;min-height:44px;width:100%;
+}
+select{width:auto;min-width:130px}
+input::placeholder{color:var(--placeholder)}
+.badge-gold{
+  display:inline-flex;align-items:center;gap:6px;border:1px solid var(--accent);color:var(--primary);
+  padding:5px 14px;border-radius:var(--radius-pill);font-size:.82rem;background:var(--accent-tint)
+}
+.deal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+@media (max-width:980px){.deal-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.deal-grid{grid-template-columns:1fr}}
+.deal{display:flex;flex-direction:column;gap:8px}
+.deal .meta{display:flex;justify-content:space-between;gap:8px;font-size:.82rem;color:var(--ink-muted)}
+.deal h3{margin:2px 0;font-size:1.05rem;color:var(--primary)}
+.deal .amt{font-size:1.45rem;font-weight:800;color:var(--ink)}
+.deal .amt small{font-size:.8rem;color:var(--ink-muted);font-weight:400}
+.deal p{margin:0;font-size:.9rem;color:var(--ink);opacity:.85}
+.deal .role{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);font-size:.84rem;color:var(--primary)}
+.empty{grid-column:1/-1;text-align:center;color:var(--ink-muted);padding:34px}
+
+/* calculators */
+.calc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-5);align-items:start}
+.seg{border:0;margin:0 0 16px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.seg legend{padding:0;margin-bottom:8px;font-size:.88rem;color:var(--primary);width:100%}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px;border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--surface);color:var(--primary);font-size:.9rem;transition:background .2s,color .2s,border-color .2s}
+.seg label:hover span{background:var(--accent-tint);border-color:var(--accent)}
+.seg input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+.seg input:focus-visible+span{outline:2px solid var(--primary);outline-offset:3px}
+@media (max-width:860px){.calc-grid{grid-template-columns:1fr}}
+.calc h3{margin:0 0 4px;color:var(--primary);font-size:1.2rem}
+.calc .desc{margin:0 0 18px;color:var(--ink-muted);font-size:.9rem}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.88rem;color:var(--primary);margin-bottom:6px}
+.field .unit{display:flex;align-items:center;gap:8px}
+.field .unit span{color:var(--ink-muted);font-size:.9rem;white-space:nowrap;min-width:3em}
+.result{
+  margin-top:18px;padding:18px;border-radius:var(--radius-lg);border:1px solid var(--accent);
+  background:rgba(var(--a-rgb),.07);
+}
+.result .row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed rgba(var(--a-rgb),.2)}
+.result .row:last-child{border-bottom:0}
+.result .row span:first-child{color:var(--ink-muted);font-size:.9rem}
+.result .row strong{color:var(--primary);text-align:right}
+.result .big{font-size:1.5rem}
+.result .msg{margin:10px 0 0;font-size:.88rem}
+.err{color:var(--error);font-size:.88rem;margin:10px 0 0;min-height:1.2em}
+.calc-actions{display:flex;gap:10px;flex-wrap:wrap}
+.privacy{
+  margin-top:20px;padding:12px 16px;border-left:3px solid var(--accent);background:rgba(var(--tint-rgb),.03);
+  font-size:.86rem;color:var(--ink-muted)
+}
+
+/* FAQ */
+.faq-tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.faq-tools input{flex:1;min-width:220px}
+details.faq{
+  border:1px solid var(--line);border-radius:var(--radius-lg);background:rgba(var(--surf-rgb),.7);margin-bottom:10px;overflow:hidden;
+}
+details.faq summary{
+  cursor:pointer;list-style:none;padding:16px 50px 16px 18px;position:relative;font-weight:700;color:var(--primary);
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:1.4rem;color:var(--accent)}
+details.faq[open] summary::after{content:"–"}
+details.faq[open] summary{background:rgba(var(--p-rgb),.35)}
+details.faq .ans{padding:14px 18px 18px;color:var(--ink);opacity:.92;font-size:.95rem}
+mark{background:var(--accent);color:var(--on-accent);padding:0 2px;border-radius:3px}
+.faq-count{font-size:.85rem;color:var(--ink-muted);margin:0 0 12px}
+.faq-cats{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.faq-chip{
+  font-family:inherit;font-size:.9rem;cursor:pointer;min-height:40px;padding:8px 16px;
+  border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--surface);color:var(--primary);
+  transition:background .2s,color .2s,border-color .2s;
+}
+.faq-chip:hover{background:var(--accent-tint);border-color:var(--accent)}
+.faq-chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+.faq-chip .n{margin-left:6px;font-size:.8rem;opacity:.75}
+.faq-chip[disabled]{cursor:default;opacity:.45}
+.faq-chip[disabled]:hover{background:var(--surface);border-color:var(--line)}
+.faq-cat{margin:28px 0 12px;font-size:1.05rem;color:var(--accent);letter-spacing:.02em}
+.faq-cat:first-child{margin-top:0}
+.faq-src{margin-top:10px;font-size:.84rem;color:var(--ink-muted)}
+
+/* resources + footer */
+.res{display:flex;gap:var(--space-5);align-items:center;justify-content:space-between;flex-wrap:wrap}
+.res h3{margin:0 0 4px;color:var(--primary)}
+.res p{margin:0;color:var(--ink-muted);font-size:.92rem}
+.file-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.file-info{flex:1;min-width:240px}
+.file-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:10px!important;font-size:.84rem!important}
+.file-item .btn{white-space:nowrap}
+footer{
+  margin-top:20px;padding:36px 0 44px;border-top:1px solid var(--line);background:var(--footer-bg);text-align:center;
+}
+footer .disc{
+  display:inline-block;max-width:860px;padding:14px 20px;border:1px solid var(--line);border-radius:var(--radius-lg);
+  color:var(--primary);font-size:.9rem;
+}
+footer .copy{margin:16px 0 0;color:var(--ink-muted);font-size:.8rem}
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;
+  background:var(--accent);color:var(--on-accent);padding:11px 20px;border-radius:var(--radius-pill);font-size:.9rem;z-index:200;
+  transition:opacity .25s,transform .25s;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (max-width:600px){
+  section.block{padding:var(--space-section-sm) 0}
+  .hero{padding:72px 0 64px}
+  .card{padding:var(--space-5)}
+}
+
+/* ---------- Dark theme (시안A 미드나잇 네이비 기반) ---------- */
+[data-theme="dark"]{
+  color-scheme:dark;
+  --surface:#111a2c;
+  --surface-alt:#0b1322;
+  --surface-section:#0c1526;
+  --surface-hero:#0d1d38;
+  --primary:#dbe7f4;
+  --primary-deep:#a6b6cc;
+  --accent:#8fb3d9;
+  --accent-soft:#14284a;
+  --accent-tint:rgba(143,179,217,.12);
+  --ink:#e6ecf4;
+  --ink-muted:#a3b1c4;
+  --line:rgba(143,179,217,.26);
+  --line-soft:rgba(143,179,217,.16);
+  --on-accent:#070b14;
+  --on-primary:#dbe7f4;
+  --on-primary-muted:#a6b6cc;
+  --placeholder:#7c899b;
+  --error:#ff9d9d;
+  --shadow-card:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.35);
+  --shadow-raise:0 6px 20px rgba(0,0,0,.5);
+  --a-rgb:143,179,217;--p-rgb:40,90,160;--glow-rgb:40,90,160;--base-rgb:7,11,20;--surf-rgb:17,26,44;--tint-rgb:255,255,255;
+  --fill-primary:#17305a;--fill-primary-deep:#0d1d38;
+  --page-bg:linear-gradient(180deg,#070b14 0%,#0b1322 40%,#070b14 100%);
+  --footer-bg:#070b14;
+  --hero-bg:radial-gradient(900px 400px at 50% -10%,rgba(40,90,160,.5),transparent 70%),radial-gradient(600px 300px at 90% 100%,rgba(143,179,217,.12),transparent 70%),linear-gradient(180deg,#0d1d38,#070b14);
+}
+html{transition:background-color .2s}
+
+/* ---------- Header tools: 다크모드 · 메뉴 ---------- */
+.hdr-tools{display:flex;align-items:center;gap:8px;flex:none}
+.icon-btn{
+  font-family:inherit;display:grid;place-items:center;width:44px;height:44px;padding:0;cursor:pointer;flex:none;
+  background:transparent;border:1px solid var(--line);border-radius:var(--radius-md);color:var(--primary);
+  transition:background .2s,border-color .2s;
+}
+.icon-btn:hover{background:var(--accent-tint);border-color:var(--accent)}
+.icon-btn svg{width:20px;height:20px;display:block}
+.theme-btn .i-sun{display:none}
+[data-theme="dark"] .theme-btn .i-sun{display:block}
+[data-theme="dark"] .theme-btn .i-moon{display:none}
+
+/* ---------- 맨 위로 ---------- */
+.to-top{
+  position:fixed;right:20px;bottom:24px;z-index:150;width:48px;height:48px;border-radius:50%;
+  display:grid;place-items:center;padding:0;cursor:pointer;font-family:inherit;
+  background:var(--accent);color:var(--on-accent);border:0;box-shadow:var(--shadow-raise);
+  opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s,background .2s;
+}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top:hover{background:var(--primary)}
+.to-top svg{width:22px;height:22px}
+@media (max-width:600px){.to-top{right:16px;bottom:16px}.toast{max-width:calc(100% - 160px);text-align:center}}
+</style>
+<script>
+/* 깜빡임 없이 저장된 테마 먼저 적용 */
+(function(){var t=null;try{t=localStorage.getItem('ibPortalTheme');}catch(e){}
+if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+document.documentElement.setAttribute('data-theme',t);})();
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#home" class="brand" aria-label="IB 포털 홈">IB 포털<span>Corporate Finance</span></a>
+    <nav class="nav" id="nav" aria-label="주요 메뉴">
+      <a href="#home">홈</a>
+      <a href="#business">사업 영역</a>
+      <a href="#funding">조달 방법</a>
+      <a href="#ipo">IPO 절차</a>
+      <a href="#pf">PF 구조</a>
+      <a href="#track">트랙레코드</a>
+      <a href="#calc">계산기</a>
+      <a href="#faq">FAQ</a>
+      <a href="#resources">자료실</a>
+    </nav>
+    <div class="hdr-tools">
+      <button class="icon-btn theme-btn" id="themeBtn" type="button" aria-pressed="false" aria-label="다크 모드로 전환" title="다크 모드로 전환">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+      </button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HOME -->
+<section class="hero" id="home" aria-labelledby="homeTitle">
+  <div class="wrap">
+    <p class="eyebrow">CORPORATE &amp; INVESTMENT BANKING</p>
+    <h1 id="homeTitle">IB 포털<small>기업금융 서비스 소개 &amp; 자금조달 학습</small></h1>
+    <div class="hero-line" aria-hidden="true"></div>
+    <p class="lead">기업의 성장 단계에 맞는 자금조달 방식과 구조를, 한눈에 비교하고 직접 계산하며 이해할 수 있는 학습형 포털입니다.</p>
+    <a class="btn solid" href="#funding">조달 방법 비교하기</a>
+    <a class="btn" href="#calc" style="margin-left:8px">계산기 바로가기</a>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section class="block" id="business" aria-labelledby="bizTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">BUSINESS</div>
+      <h2 id="bizTitle">사업 영역</h2>
+      <p>자본시장·부동산·M&amp;A 전반에서 기업의 자금조달과 구조화를 지원합니다.</p>
+    </div>
+    <div class="grid3">
+      <article class="card biz">
+        <div class="icon">ECM<br></div>
+        <h3>ECM · DCM</h3>
+        <p class="sub">주식·채권 자본시장</p>
+        <ul class="dots">
+          <li>IPO, 유상증자, 주식연계증권 등 주식자본시장(ECM) 자문 및 주관</li>
+          <li>회사채, 기업어음(CP) 등 채권자본시장(DCM) 발행 주관</li>
+          <li>수요예측 운영, 발행 구조·시기 설계</li>
+        </ul>
+      </article>
+      <article class="card biz">
+        <div class="icon">PF</div>
+        <h3>부동산 PF · Structured Finance</h3>
+        <p class="sub">구조화 금융</p>
+        <ul class="dots">
+          <li>부동산 개발사업 프로젝트 파이낸싱 구조 설계 및 대주단 구성</li>
+          <li>자산유동화 등 구조화 금융 자문</li>
+          <li>사업성·현금흐름·신용보강 구조 검토</li>
+        </ul>
+      </article>
+      <article class="card biz">
+        <div class="icon">M&amp;A</div>
+        <h3>M&amp;A 인수금융 · 자문</h3>
+        <p class="sub">인수·합병</p>
+        <ul class="dots">
+          <li>인수·매각 자문, 기업가치 평가 및 거래 구조 설계</li>
+          <li>인수금융 주선 및 자금조달 구조 설계</li>
+          <li>실사·협상·클로징 전 과정 지원</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING -->
+<section class="block" id="funding" aria-labelledby="fundTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">FUNDING</div>
+      <h2 id="fundTitle">조달 방법 비교</h2>
+      <p>IPO · 유상증자 · 회사채 · CP를 성격, 소요 기간, 장단점 기준으로 비교합니다.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="자금조달 방법 비교표 (가로 스크롤 가능)">
+      <table class="cmp">
+        <thead>
+          <tr><th scope="col">구분</th><th scope="col">성격</th><th scope="col">소요 기간(일반적 예시)</th><th scope="col">장점</th><th scope="col">단점 · 유의점</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">IPO<br><span class="pill">지분 · 상장</span></th>
+            <td>비상장 기업이 주식을 최초로 공개하고 증권시장에 상장하여 자금을 조달</td>
+            <td>준비 단계 포함 통상 수개월~1년 내외</td>
+            <td>대규모 자기자본 확충, 인지도·신용도 제고, 주주 구성 다변화</td>
+            <td>상장 요건·공시 부담, 지배구조 투명성 요구, 시장 상황에 따른 일정·공모가 변동</td>
+          </tr>
+          <tr>
+            <th scope="row">유상증자<br><span class="pill">지분 · 상장사</span></th>
+            <td>기존 상장사가 신주를 발행하여 자기자본을 확충 (주주배정·일반공모·제3자배정 등)</td>
+            <td>통상 1~2개월 내외</td>
+            <td>부채 증가 없이 재무구조 개선, 원리금 상환 부담 없음</td>
+            <td>기존 주주 지분 희석, 주가 하락 우려, 발행가액·방식에 따른 시장 반응 부담</td>
+          </tr>
+          <tr>
+            <th scope="row">회사채<br><span class="pill">채권 · 중장기</span></th>
+            <td>기업이 만기와 이자를 정하여 투자자에게 채권을 발행하는 중장기 차입</td>
+            <td>수요예측 포함 통상 2~4주 내외</td>
+            <td>지분 희석 없음, 만기 분산·장기 조달 가능, 이자비용 세무상 비용 처리</td>
+            <td>신용등급·시장금리에 좌우, 원리금 상환 의무, 재무비율(차입비율 등) 악화 가능</td>
+          </tr>
+          <tr>
+            <th scope="row">CP<br><span class="pill">단기 · 어음</span></th>
+            <td>단기 운영자금 조달을 위해 발행하는 단기 약속어음 (통상 만기 1년 이내)</td>
+            <td>통상 수일~2주 내외</td>
+            <td>절차가 간편하고 신속, 단기 자금 수요에 유연하게 대응</td>
+            <td>만기 도래 시 재조달(롤오버) 위험, 시장 경색 시 조달 곤란, 금리 변동 노출</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:12px">※ 소요 기간은 이해를 돕기 위한 일반적 예시이며, 기업 상황·시장 여건·규제 절차에 따라 달라질 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- IPO -->
+<section class="block" id="ipo" aria-labelledby="ipoTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">IPO PROCESS</div>
+      <h2 id="ipoTitle">IPO 절차</h2>
+      <p>상장 준비부터 사후관리까지, 6단계로 살펴봅니다.</p>
+    </div>
+    <ol class="timeline">
+      <li class="card">
+        <h3>사전 진단 · 주관사 선정</h3>
+        <p>재무·지배구조·내부통제를 점검하고 대표주관사를 선정합니다. 상장 요건 충족 가능성을 사전에 확인합니다.</p>
+        <span class="pill dur">준비 단계</span>
+      </li>
+      <li class="card">
+        <h3>상장예비심사</h3>
+        <p>한국거래소에 상장예비심사를 청구하고, 상장 적격성에 대한 심사를 받습니다.</p>
+        <span class="pill dur">거래소 심사</span>
+      </li>
+      <li class="card">
+        <h3>증권신고서 제출</h3>
+        <p>공모 조건과 투자위험을 기재한 증권신고서를 금융당국에 제출하고 효력 발생을 기다립니다.</p>
+        <span class="pill dur">금융당국 심사</span>
+      </li>
+      <li class="card">
+        <h3>수요예측 · 공모가 확정</h3>
+        <p>기관투자자의 수요를 파악하여 공모가격을 결정합니다. 가격은 수요와 시장 상황을 반영합니다.</p>
+        <span class="pill dur">가격 결정</span>
+      </li>
+      <li class="card">
+        <h3>청약 · 배정 · 납입</h3>
+        <p>일반투자자 청약을 받고 배정 후 납입 절차를 진행합니다.</p>
+        <span class="pill dur">공모 진행</span>
+      </li>
+      <li class="card">
+        <h3>상장 · 사후관리</h3>
+        <p>매매가 개시되며, 이후 공시·보호예수 등 상장유지 및 사후관리 의무가 적용됩니다.</p>
+        <span class="pill dur">상장 후</span>
+      </li>
+    </ol>
+    <p class="note" style="margin-top:14px">※ 단계별 세부 일정과 요건은 시장(유가증권·코스닥 등)과 개별 딜에 따라 다릅니다.</p>
+  </div>
+</section>
+
+<!-- PF -->
+<section class="block" id="pf" aria-labelledby="pfTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">PF STRUCTURE</div>
+      <h2 id="pfTitle">PF · 유동화 구조도</h2>
+      <p>각 박스를 누르면 참여자의 역할 설명이 나타납니다. (일반적 구조 예시이며 실제 구조는 사업별로 다릅니다.)</p>
+    </div>
+
+    <div class="card">
+      <div class="pf-grid" id="pfGrid">
+        <button class="pf-node pf-order-1" data-key="developer" aria-pressed="false" style="grid-column:1;grid-row:1">시행사<small>사업 주체</small></button>
+        <div class="arrow pf-order-2" style="grid-column:2;grid-row:1"><b class="ah">→</b><b class="av">↓</b>사업 추진<br>지분 출자</div>
+        <button class="pf-node pf-order-3" data-key="spc" aria-pressed="false" style="grid-column:3;grid-row:1">SPC<small>사업·유동화 매개 법인</small></button>
+        <div class="arrow pf-order-4" style="grid-column:4;grid-row:1"><b class="ah">←</b><b class="av">↑</b>대출 · 투자<br>원리금 상환</div>
+        <button class="pf-node pf-order-5" data-key="lenders" aria-pressed="false" style="grid-column:5;grid-row:1">대주단<small>금융기관·투자자</small></button>
+
+        <div class="arrow pf-order-6" style="grid-column:3;grid-row:2"><b class="ah">↕</b><b class="av">↕</b>담보 · 자금관리</div>
+
+        <button class="pf-node pf-order-7" data-key="builder" aria-pressed="false" style="grid-column:1;grid-row:3">시공사<small>건설 수행</small></button>
+        <div class="arrow pf-order-8" style="grid-column:2;grid-row:3"><b class="ah">←</b><b class="av">↑</b>공사비 지급<br>책임준공 약정</div>
+        <button class="pf-node pf-order-9" data-key="trustee" aria-pressed="false" style="grid-column:3;grid-row:3">신탁사<small>담보·자금관리</small></button>
+      </div>
+
+      <div class="pf-detail" id="pfDetail" aria-live="polite">
+        <p class="hint">위 박스 중 하나를 선택해 보세요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK -->
+<section class="block" id="track" aria-labelledby="trackTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">TRACK RECORD</div>
+      <h2 id="trackTitle">트랙레코드</h2>
+      <p>연도와 유형으로 필터링하여 대표 딜을 확인합니다.</p>
+    </div>
+    <p><span class="badge-gold">✔ 공시된 딜만 게재</span></p>
+    <div class="filters">
+      <div><label for="fYear">연도</label>
+        <select id="fYear"><option value="all">전체</option></select></div>
+      <div><label for="fType">유형</label>
+        <select id="fType"><option value="all">전체</option></select></div>
+      <button class="btn" id="fReset" type="button">필터 초기화</button>
+    </div>
+    <div class="deal-grid" id="dealGrid" aria-live="polite"></div>
+    <p class="note" style="margin-top:14px">※ 아래 카드는 화면 구성을 보여주는 <strong>예시 데이터</strong>이며 실제 거래가 아닙니다. 게재 시에는 공시가 확인된 딜만 사용하고, 법무·준법감시 확인을 거쳐 교체해 주세요.</p>
+  </div>
+</section>
+
+<!-- CALC -->
+<section class="block" id="calc" aria-labelledby="calcTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">CALCULATOR</div>
+      <h2 id="calcTitle">계산기</h2>
+      <p>입력한 숫자로 회사채 이자비용, 차환 비용, PF 핵심 지표, 부동산 Cap rate를 간단히 계산해 봅니다.</p>
+    </div>
+    <div class="calc-grid">
+      <!-- bond -->
+      <form class="card calc" id="bondForm" novalidate autocomplete="off">
+        <h3>회사채 이자비용 계산기</h3>
+        <p class="desc">발행금액 × 금리로 연간 이자비용을 계산합니다.</p>
+        <div class="field"><label for="bAmt">발행금액</label>
+          <div class="unit"><input id="bAmt" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 500"><span>억원</span></div></div>
+        <div class="field"><label for="bRate">연 금리</label>
+          <div class="unit"><input id="bRate" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 4.5"><span>%</span></div></div>
+        <div class="field"><label for="bYear">만기</label>
+          <div class="unit"><input id="bYear" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 3"><span>년</span></div></div>
+        <div class="calc-actions">
+          <button class="btn solid" type="submit">계산하기</button>
+          <button class="btn" type="reset" id="bReset">초기화</button>
+        </div>
+        <p class="err" id="bErr" role="alert"></p>
+        <div class="result" id="bOut" hidden>
+          <div class="row"><span>연간 이자비용</span><strong class="big" id="bAnnual">-</strong></div>
+          <div class="row"><span>월 환산(연÷12)</span><strong id="bMonthly">-</strong></div>
+          <div class="row"><span>만기까지 이자 합계</span><strong id="bTotal">-</strong></div>
+          <p class="note msg">단리·이자 연 1회 지급 가정이며, 발행수수료·세금 등은 반영하지 않았습니다.</p>
+        </div>
+      </form>
+
+      <!-- PF -->
+      <form class="card calc" id="pfForm" novalidate autocomplete="off">
+        <h3>PF 지표 계산기 (LTV · DSCR)</h3>
+        <p class="desc">LTV = 대출금 ÷ 담보가치, DSCR = 연간 현금흐름 ÷ 연간 원리금</p>
+        <div class="field"><label for="pLoan">대출금</label>
+          <div class="unit"><input id="pLoan" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 700"><span>억원</span></div></div>
+        <div class="field"><label for="pCol">담보가치</label>
+          <div class="unit"><input id="pCol" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 1000"><span>억원</span></div></div>
+        <div class="field"><label for="pCf">연간 현금흐름</label>
+          <div class="unit"><input id="pCf" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 60"><span>억원</span></div></div>
+        <div class="field"><label for="pDebt">연간 원리금</label>
+          <div class="unit"><input id="pDebt" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 45"><span>억원</span></div></div>
+        <div class="calc-actions">
+          <button class="btn solid" type="submit">계산하기</button>
+          <button class="btn" type="reset" id="pReset">초기화</button>
+        </div>
+        <p class="err" id="pErr" role="alert"></p>
+        <div class="result" id="pOut" hidden>
+          <div class="row"><span>LTV</span><strong class="big" id="pLtv">-</strong></div>
+          <div class="row"><span>DSCR</span><strong class="big" id="pDscr">-</strong></div>
+          <p class="msg" id="pMsg"></p>
+          <p class="note msg">판단 기준(예: 1.0 미만 = 현금흐름으로 원리금 미충당)은 학습용 참고이며, 실제 승인 기준은 금융기관·사업별로 다릅니다.</p>
+        </div>
+      </form>
+
+      <!-- refinancing -->
+      <form class="card calc" id="refiForm" novalidate autocomplete="off">
+        <h3>차환(롤오버) 비용 비교 계산기</h3>
+        <p class="desc">만기가 돌아온 채권을 새 금리로 다시 발행할 때 연간 이자가 얼마나 달라지는지 비교합니다.</p>
+        <div class="field"><label for="rAmt">차환 금액</label>
+          <div class="unit"><input id="rAmt" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 300"><span>억원</span></div></div>
+        <div class="field"><label for="rOld">기존(만기 채권) 금리</label>
+          <div class="unit"><input id="rOld" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 3.8"><span>%</span></div></div>
+        <div class="field"><label for="rNew">새 발행 금리</label>
+          <div class="unit"><input id="rNew" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 4.6"><span>%</span></div></div>
+        <div class="field"><label for="rYear">새 채권 만기</label>
+          <div class="unit"><input id="rYear" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 2"><span>년</span></div></div>
+        <div class="calc-actions">
+          <button class="btn solid" type="submit">계산하기</button>
+          <button class="btn" type="reset" id="rReset">초기화</button>
+        </div>
+        <p class="err" id="rErr" role="alert"></p>
+        <div class="result" id="rOut" hidden aria-live="polite">
+          <div class="row"><span>기존 연 이자</span><strong id="rOldInt">-</strong></div>
+          <div class="row"><span>새 연 이자</span><strong id="rNewInt">-</strong></div>
+          <div class="row"><span>연간 이자 증감</span><strong class="big" id="rDiff">-</strong></div>
+          <div class="row"><span>새 만기까지 증감 합계</span><strong id="rTotal">-</strong></div>
+          <p class="msg" id="rMsg"></p>
+          <p class="note msg">단리·이자 연 1회 지급 가정이며, 발행수수료·신용평가 수수료·세금 등 차환에 드는 부대비용은 반영하지 않았습니다. 실제 차환 금리는 시장 상황과 신용등급에 따라 달라집니다.</p>
+        </div>
+      </form>
+
+      <!-- cap rate -->
+      <form class="card calc" id="capForm" novalidate autocomplete="off">
+        <h3>Cap rate 계산기 (역산 가능)</h3>
+        <p class="desc">Cap rate = 연간 순영업소득(NOI) ÷ 자산가치 × 100. 세 값 중 두 개를 넣으면 나머지 하나를 구합니다.</p>
+        <fieldset class="seg" id="capMode">
+          <legend>무엇을 구할까요?</legend>
+          <label><input type="radio" name="capMode" value="rate" checked><span>Cap rate</span></label>
+          <label><input type="radio" name="capMode" value="value"><span>자산가치</span></label>
+          <label><input type="radio" name="capMode" value="noi"><span>NOI</span></label>
+        </fieldset>
+        <div class="field" data-cap="noi"><label for="cNoi">연간 순영업소득(NOI)</label>
+          <div class="unit"><input id="cNoi" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 48"><span>억원</span></div></div>
+        <div class="field" data-cap="value"><label for="cVal">자산가치(매입가)</label>
+          <div class="unit"><input id="cVal" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 1000"><span>억원</span></div></div>
+        <div class="field" data-cap="rate" hidden><label for="cRate">Cap rate</label>
+          <div class="unit"><input id="cRate" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 4.8"><span>%</span></div></div>
+        <div class="calc-actions">
+          <button class="btn solid" type="submit">계산하기</button>
+          <button class="btn" type="reset" id="cReset">초기화</button>
+        </div>
+        <p class="err" id="cErr" role="alert"></p>
+        <div class="result" id="cOut" hidden aria-live="polite">
+          <div class="row"><span id="cMainLabel">Cap rate</span><strong class="big" id="cMain">-</strong></div>
+          <div id="cRows"></div>
+          <p class="msg" id="cMsg"></p>
+          <p class="note msg">NOI는 임대수입에서 공실·관리비·보험료·재산세 등 운영비용을 뺀 금액으로, 대출이자·감가상각·법인세는 빼지 않습니다. 학습용 단순 계산이며 감정평가나 투자 판단을 대신하지 않습니다.</p>
+        </div>
+      </form>
+    </div>
+    <p class="privacy">🔒 입력하신 값은 이 화면에서만 계산되며, 저장되거나 외부로 전송되지 않습니다. 페이지를 닫거나 새로고침하면 사라집니다.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" id="faq" aria-labelledby="faqTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">FAQ</div>
+      <h2 id="faqTitle">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-tools">
+      <label for="faqSearch" style="position:absolute;left:-9999px">FAQ 검색</label>
+      <input type="search" id="faqSearch" placeholder="궁금한 키워드를 검색하세요 (예: 유상증자, LTV)" autocomplete="off">
+      <button class="btn" type="button" id="faqAll">모두 펼치기</button>
+    </div>
+    <div class="faq-cats" id="faqCats" role="group" aria-label="FAQ 카테고리"></div>
+    <p class="faq-count" id="faqCount" aria-live="polite"></p>
+    <div id="faqList"></div>
+    <p class="empty" id="faqEmpty" hidden>조건에 맞는 질문이 없습니다. 다른 키워드로 찾거나 '전체'를 눌러 보세요.</p>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="block" id="resources" aria-labelledby="resTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">RESOURCES</div>
+      <h2 id="resTitle">자료실</h2>
+    </div>
+    <ul class="file-list" aria-label="자료 목록">
+      <li class="card res file-item">
+        <div class="file-info">
+          <h3>기업금융(IB) 서비스 소개서</h3>
+          <p>3대 사업 영역(ECM·DCM, 부동산 PF·구조화금융, M&amp;A·인수금융), 자금조달 방법 비교, IPO 절차를 정리한 소개서입니다.</p>
+          <p class="file-meta"><span class="pill">PDF</span><span>ib-service-introduction.pdf</span><span>270 KB · 2쪽</span></p>
+        </div>
+        <a class="btn solid" href="files/ib-service-introduction.pdf" download="IB_서비스소개서.pdf" type="application/pdf" aria-label="기업금융(IB) 서비스 소개서 PDF 다운로드, 270 KB">다운로드</a>
+      </li>
+      <li class="card res file-item">
+        <div class="file-info">
+          <h3>기업 자금조달 용어 안내</h3>
+          <p>발행·채권·구조화금융 분야에서 재무 담당자가 자주 마주치는 용어(주관사, 수요예측, 표면금리, SPC, 트랜치 등)를 정리한 안내서입니다.</p>
+          <p class="file-meta"><span class="pill">PDF</span><span>funding-glossary.pdf</span><span>268 KB · 2쪽</span></p>
+        </div>
+        <a class="btn solid" href="files/funding-glossary.pdf" download="자금조달_용어안내.pdf" type="application/pdf" aria-label="기업 자금조달 용어 안내 PDF 다운로드, 268 KB">다운로드</a>
+      </li>
+    </ul>
+    <p class="note" style="margin-top:14px">※ 자료는 교육용 샘플이며 투자 권유가 아닙니다. 다운로드 버튼을 누르면 PDF가 바로 저장됩니다.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="disc">본 페이지는 일반 정보 제공 목적이며 투자 권유가 아닙니다 · 준법감시인 심의필 제○○호</p>
+    <p class="copy">© IB 포털. All rights reserved.</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="맨 위로" title="맨 위로" tabindex="-1">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+</button>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Nav ---------- */
+var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+var mobileMQ=window.matchMedia('(max-width:980px)');
+function setMenu(open){
+  nav.classList.toggle('open',open);
+  menuBtn.setAttribute('aria-expanded',String(open));
+  menuBtn.setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기');
+}
+function closeMenu(){setMenu(false);}
+menuBtn.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
+/* 메뉴 항목을 누르면 닫고, 누른 항목을 바로 강조 */
+nav.addEventListener('click',function(e){
+  var a=e.target.closest('a'); if(!a) return;
+  setActive(a.getAttribute('href').slice(1));
+  lockSpy();
+  closeMenu();
+});
+/* Esc·바깥 영역 클릭·화면이 넓어지면 닫기 */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&nav.classList.contains('open')){closeMenu();menuBtn.focus();}
+});
+document.addEventListener('click',function(e){
+  if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menuBtn.contains(e.target)) closeMenu();
+});
+(mobileMQ.addEventListener?mobileMQ.addEventListener.bind(mobileMQ,'change'):mobileMQ.addListener.bind(mobileMQ))(function(){if(!mobileMQ.matches) closeMenu();});
+
+/* scroll spy: 지금 보고 있는 영역의 메뉴 강조 */
+var links=[].slice.call(nav.querySelectorAll('a'));
+var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+var spyLockT=null;
+function setActive(cur){
+  links.forEach(function(a){
+    var on=a.getAttribute('href')==='#'+cur;
+    a.classList.toggle('active',on);
+    if(on) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current');
+  });
+}
+/* 메뉴로 이동하는 동안(부드러운 스크롤)에는 중간 영역이 잠깐 강조되지 않도록 잠시 멈춤 */
+function lockSpy(){clearTimeout(spyLockT);spyLockT=setTimeout(function(){spyLockT=null;spy();},900);}
+function spy(){
+  if(spyLockT) return;
+  var hdr=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'),10)||64;
+  var line=hdr+Math.min(window.innerHeight*0.3,200);
+  var cur=ids[0];
+  ids.forEach(function(id){var el=document.getElementById(id); if(el && el.getBoundingClientRect().top<=line) cur=id;});
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) cur=ids[ids.length-1];
+  setActive(cur);
+}
+var spyRaf=0;
+function onScroll(){if(!spyRaf) spyRaf=requestAnimationFrame(function(){spyRaf=0;spy();});}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',onScroll);
+window.addEventListener('hashchange',function(){lockSpy();setActive(location.hash.slice(1)||ids[0]);});
+spy();
+
+/* ---------- 다크 모드 ---------- */
+var themeBtn=document.getElementById('themeBtn');
+function syncThemeBtn(){
+  var dark=document.documentElement.getAttribute('data-theme')==='dark';
+  var label=dark?'라이트 모드로 전환':'다크 모드로 전환';
+  themeBtn.setAttribute('aria-pressed',String(dark));
+  themeBtn.setAttribute('aria-label',label);themeBtn.title=label;
+}
+themeBtn.addEventListener('click',function(){
+  var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',next);
+  try{localStorage.setItem('ibPortalTheme',next);}catch(e){}
+  syncThemeBtn();
+});
+/* 직접 고르지 않았다면 기기 설정 변경을 따라감 */
+if(window.matchMedia){
+  var darkMQ=matchMedia('(prefers-color-scheme: dark)');
+  var onScheme=function(e){var saved=null;try{saved=localStorage.getItem('ibPortalTheme');}catch(_){}
+    if(!saved){document.documentElement.setAttribute('data-theme',e.matches?'dark':'light');syncThemeBtn();}};
+  if(darkMQ.addEventListener) darkMQ.addEventListener('change',onScheme); else if(darkMQ.addListener) darkMQ.addListener(onScheme);
+}
+syncThemeBtn();
+
+/* ---------- 맨 위로 ---------- */
+var toTop=document.getElementById('toTop');
+function syncToTop(){
+  var show=window.scrollY>600;
+  toTop.classList.toggle('show',show);
+  toTop.tabIndex=show?0:-1;
+}
+window.addEventListener('scroll',function(){requestAnimationFrame(syncToTop);},{passive:true});
+toTop.addEventListener('click',function(){
+  window.scrollTo(0,0);
+  var brand=document.querySelector('.brand'); if(brand) brand.focus({preventScroll:true});
+});
+syncToTop();
+
+/* toast */
+var toastEl=document.getElementById('toast'), toastT;
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show');},2400);}
+
+/* ---------- PF diagram ---------- */
+var PF={
+  developer:{t:'시행사',rows:[
+    ['역할','부동산 개발사업을 기획하고 추진하는 사업 주체. 토지 확보, 인허가, 분양·임대 등을 총괄'],
+    ['주요 책임','자기자본(지분) 출자, 사업 일정·분양 관리, 사업 리스크의 1차 부담'],
+    ['점검 포인트','시행사의 재무 건전성과 자기자본 비율, 사업 경험']]},
+  spc:{t:'SPC (특수목적법인)',rows:[
+    ['역할','사업 또는 유동화를 위해 설립되는 별도 법인. 모기업 리스크와 사업을 분리하는 매개체'],
+    ['주요 책임','대출 차입 또는 유동화증권 발행의 주체, 사업 자산과 현금흐름의 귀속 단위'],
+    ['점검 포인트','도산절연 여부, 자금 흐름의 투명성, 설립 목적 외 활동 제한']]},
+  lenders:{t:'대주단',rows:[
+    ['역할','사업에 자금을 대출하거나 유동화증권에 투자하는 금융기관·투자자의 집단'],
+    ['주요 책임','대출 약정에 따른 자금 제공, 약정 조건(재무비율 등) 점검, 담보권 행사 권한'],
+    ['점검 포인트','선·후순위 구조, 대주 간 의사결정 방식, 조기상환 사유(기한이익 상실) 조건']]},
+  builder:{t:'시공사',rows:[
+    ['역할','실제 건설공사를 수행하는 건설회사'],
+    ['주요 책임','공사 수행, 책임준공 약정, 경우에 따라 채무인수·신용보강 제공'],
+    ['점검 포인트','시공사의 신용도와 우발채무 규모, 공사비 증액·준공 지연 위험']]},
+  trustee:{t:'신탁사',rows:[
+    ['역할','토지나 사업 자산을 신탁받아 관리하고 사업 자금의 입출금을 통제'],
+    ['주요 책임','자금관리 계좌 운영, 공사비 등 용도에 맞는 자금 집행, 담보신탁 수탁',],
+    ['점검 포인트','신탁 유형(관리형·담보신탁 등)별 권한 범위와 책임준공 확약 여부']]}
+};
+var pfDetail=document.getElementById('pfDetail');
+var pfNodes=[].slice.call(document.querySelectorAll('.pf-node'));
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+pfNodes.forEach(function(b){
+  b.addEventListener('click',function(){
+    var d=PF[b.dataset.key];
+    pfNodes.forEach(function(n){n.setAttribute('aria-pressed',String(n===b));});
+    var html='<h3>'+esc(d.t)+'</h3><dl>';
+    d.rows.forEach(function(r){html+='<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>';});
+    html+='</dl>';
+    pfDetail.innerHTML=html;
+  });
+});
+
+/* ---------- Track record (sample data) ---------- */
+var DEALS=[
+  {y:2025,type:'ECM',name:'A사 코스닥 IPO',amt:'공모 약 800억원',desc:'제조업 성장기업의 코스닥 상장 공모 (예시)',role:'대표주관'},
+  {y:2025,type:'DCM',name:'B사 무보증 회사채',amt:'발행 1,500억원',desc:'3년 만기 회사채, 수요예측 진행 (예시)',role:'대표주관'},
+  {y:2024,type:'부동산 PF',name:'C 복합개발 PF',amt:'대출 약 3,000억원',desc:'수도권 복합개발 사업 대주단 구성 (예시)',role:'주선'},
+  {y:2024,type:'M&A',name:'D사 인수금융',amt:'약 2,000억원',desc:'경영권 인수를 위한 인수금융 주선 (예시)',role:'인수금융 주선'},
+  {y:2023,type:'ECM',name:'E사 유상증자',amt:'약 600억원',desc:'시설투자 목적 주주배정 유상증자 (예시)',role:'대표주관'},
+  {y:2023,type:'DCM',name:'F사 ABCP·유동화',amt:'약 1,000억원',desc:'매출채권 기반 유동화 구조 (예시)',role:'주관'}
+];
+var dealGrid=document.getElementById('dealGrid'), fYear=document.getElementById('fYear'), fType=document.getElementById('fType');
+(function initFilters(){
+  var years=[],types=[];
+  DEALS.forEach(function(d){ if(years.indexOf(d.y)<0) years.push(d.y); if(types.indexOf(d.type)<0) types.push(d.type); });
+  years.sort(function(a,b){return b-a;}).forEach(function(y){var o=document.createElement('option');o.value=y;o.textContent=y+'년';fYear.appendChild(o);});
+  types.forEach(function(t){var o=document.createElement('option');o.value=t;o.textContent=t;fType.appendChild(o);});
+})();
+function renderDeals(){
+  var y=fYear.value, t=fType.value;
+  var list=DEALS.filter(function(d){return (y==='all'||String(d.y)===y)&&(t==='all'||d.type===t);});
+  if(!list.length){dealGrid.innerHTML='<p class="empty">조건에 맞는 딜이 없습니다.</p>';return;}
+  dealGrid.innerHTML=list.map(function(d){
+    return '<article class="card deal"><div class="meta"><span>'+d.y+'년</span><span class="pill">'+esc(d.type)+'</span></div>'+
+      '<h3>'+esc(d.name)+'</h3><div class="amt">'+esc(d.amt)+'</div><p>'+esc(d.desc)+'</p>'+
+      '<div class="role">역할: '+esc(d.role)+' · 공시 기준</div></article>';
+  }).join('');
+}
+fYear.addEventListener('change',renderDeals);
+fType.addEventListener('change',renderDeals);
+document.getElementById('fReset').addEventListener('click',function(){fYear.value='all';fType.value='all';renderDeals();});
+renderDeals();
+
+/* ---------- Calculators ---------- */
+function num(id){
+  var v=document.getElementById(id).value.trim();
+  if(v==='') return NaN;
+  return Number(v);
+}
+function fmt(n,d){return n.toLocaleString('ko-KR',{minimumFractionDigits:d||0,maximumFractionDigits:d===undefined?2:d});}
+function won(eok){ /* 억원 -> 표기 */
+  var w=Math.round(eok*1e8);
+  return fmt(eok,2)+'억원 ('+w.toLocaleString('ko-KR')+'원)';
+}
+document.getElementById('bondForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var a=num('bAmt'), r=num('bRate'), y=num('bYear');
+  var err=document.getElementById('bErr'), out=document.getElementById('bOut');
+  err.textContent='';out.hidden=true;
+  if([a,r,y].some(isNaN)){err.textContent='발행금액, 금리, 만기를 모두 입력해 주세요.';return;}
+  if(a<0||r<0||y<0){err.textContent='0 이상의 숫자를 입력해 주세요.';return;}
+  var annual=a*r/100;
+  document.getElementById('bAnnual').textContent=won(annual);
+  document.getElementById('bMonthly').textContent=fmt(annual/12,2)+'억원';
+  document.getElementById('bTotal').textContent=won(annual*y);
+  out.hidden=false;
+});
+document.getElementById('bondForm').addEventListener('reset',function(){
+  document.getElementById('bErr').textContent='';document.getElementById('bOut').hidden=true;
+});
+
+/* 차환(롤오버) 비용 비교 — 입력값은 이 화면 안에서만 계산하며 저장·전송하지 않음 */
+document.getElementById('refiForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var a=num('rAmt'), ro=num('rOld'), rn=num('rNew'), y=num('rYear');
+  var err=document.getElementById('rErr'), out=document.getElementById('rOut');
+  err.textContent='';out.hidden=true;
+  if([a,ro,rn,y].some(isNaN)){err.textContent='차환 금액, 기존 금리, 새 금리, 만기를 모두 입력해 주세요.';return;}
+  if(a<0||ro<0||rn<0||y<0){err.textContent='0 이상의 숫자를 입력해 주세요.';return;}
+  if(ro>100||rn>100){err.textContent='금리는 % 단위로 입력해 주세요(예: 4.6).';return;}
+  var oi=a*ro/100, ni=a*rn/100, d=ni-oi, gap=rn-ro;
+  var sign=function(v){return v>0?'+':(v<0?'−':'');};
+  document.getElementById('rOldInt').textContent=won(oi);
+  document.getElementById('rNewInt').textContent=won(ni);
+  document.getElementById('rDiff').textContent=sign(d)+fmt(Math.abs(d),2)+'억원';
+  document.getElementById('rTotal').textContent=sign(d)+fmt(Math.abs(d*y),2)+'억원';
+  var g=fmt(Math.abs(gap),2)+'%p';
+  document.getElementById('rMsg').textContent=
+    d>0?('새 금리가 '+g+' 높아 연간 이자가 '+fmt(d,2)+'억원 늘어납니다. 차환 시점 분산이나 만기 조정 등을 함께 검토해 볼 수 있습니다.'):
+    d<0?('새 금리가 '+g+' 낮아 연간 이자가 '+fmt(-d,2)+'억원 줄어듭니다.'):
+    '두 금리가 같아 연간 이자 변화가 없습니다.';
+  out.hidden=false;
+});
+document.getElementById('refiForm').addEventListener('reset',function(){
+  document.getElementById('rErr').textContent='';document.getElementById('rOut').hidden=true;
+});
+
+/* Cap rate (정산·역산) — 입력값은 이 화면 안에서만 계산하며 저장·전송하지 않음 */
+(function(){
+  var form=document.getElementById('capForm');
+  var fields=[].slice.call(form.querySelectorAll('[data-cap]'));
+  var err=document.getElementById('cErr'), out=document.getElementById('cOut');
+  function mode(){return form.querySelector('input[name="capMode"]:checked').value;}
+  function syncMode(){
+    var m=mode();
+    fields.forEach(function(f){f.hidden=f.getAttribute('data-cap')===m;});
+    err.textContent='';out.hidden=true;
+  }
+  form.addEventListener('change',function(e){if(e.target.name==='capMode') syncMode();});
+  function row(label,val){return '<div class="row"><span>'+label+'</span><strong>'+val+'</strong></div>';}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var m=mode(), noi=num('cNoi'), val=num('cVal'), rate=num('cRate');
+    err.textContent='';out.hidden=true;
+    var need={rate:[noi,val],value:[noi,rate],noi:[val,rate]}[m];
+    var names={rate:'NOI와 자산가치를',value:'NOI와 Cap rate를',noi:'자산가치와 Cap rate를'}[m];
+    if(need.some(isNaN)){err.textContent=names+' 모두 입력해 주세요.';return;}
+    if(need.some(function(v){return v<0;})){err.textContent='0 이상의 숫자를 입력해 주세요.';return;}
+    if(m!=='rate'&&(rate<=0||rate>100)){err.textContent='Cap rate는 0보다 크고 100 이하인 % 값으로 입력해 주세요(예: 4.8).';return;}
+    if(m==='rate'&&val<=0){err.textContent='자산가치는 0보다 커야 Cap rate를 계산할 수 있습니다.';return;}
+    if(m==='value'&&noi<=0){err.textContent='NOI가 0보다 커야 자산가치를 역산할 수 있습니다.';return;}
+    var label, main, rows='', msg;
+    if(m==='rate'){
+      rate=noi/val*100;
+      label='Cap rate'; main=fmt(rate,2)+'%';
+      rows+=row('자산가치 ÷ NOI (배수)',noi>0?fmt(val/noi,1)+'배':'-');
+      rows+=row('NOI만으로 회수하는 기간',noi>0?'약 '+fmt(val/noi,1)+'년':'-');
+      msg='자산가치 '+fmt(val,2)+'억원에서 연 '+fmt(noi,2)+'억원의 NOI가 나오면 Cap rate는 '+fmt(rate,2)+'%입니다. 같은 NOI라면 가격이 높을수록 Cap rate는 낮아집니다.';
+    }else if(m==='value'){
+      val=noi/(rate/100);
+      label='자산가치'; main=won(val);
+      var lo=rate+0.25, hi=rate-0.25;
+      rows+=row('Cap rate +0.25%p ('+fmt(lo,2)+'%)',fmt(noi/(lo/100),2)+'억원');
+      rows+=row('Cap rate −0.25%p ('+fmt(hi,2)+'%)',hi>0?fmt(noi/(hi/100),2)+'억원':'-');
+      msg='연 NOI '+fmt(noi,2)+'억원을 Cap rate '+fmt(rate,2)+'%로 나누면 자산가치는 약 '+fmt(val,2)+'억원입니다. Cap rate가 조금만 바뀌어도 가치가 크게 달라지므로 위의 ±0.25%p 결과도 함께 보세요.';
+    }else{
+      noi=val*rate/100;
+      label='필요한 연간 NOI'; main=won(noi);
+      rows+=row('월 환산(연÷12)',fmt(noi/12,2)+'억원');
+      msg='자산가치 '+fmt(val,2)+'억원에서 Cap rate '+fmt(rate,2)+'%를 맞추려면 연 NOI가 약 '+fmt(noi,2)+'억원이어야 합니다.';
+    }
+    document.getElementById('cMainLabel').textContent=label;
+    document.getElementById('cMain').textContent=main;
+    document.getElementById('cRows').innerHTML=rows;
+    document.getElementById('cMsg').textContent=msg;
+    out.hidden=false;
+  });
+  form.addEventListener('reset',function(){setTimeout(syncMode,0);});
+  syncMode();
+})();
+
+document.getElementById('pfForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var loan=num('pLoan'), col=num('pCol'), cf=num('pCf'), debt=num('pDebt');
+  var err=document.getElementById('pErr'), out=document.getElementById('pOut'), msg=document.getElementById('pMsg');
+  err.textContent='';out.hidden=true;
+  if([loan,col,cf,debt].some(isNaN)){err.textContent='네 가지 항목을 모두 입력해 주세요.';return;}
+  if(loan<0||col<0||cf<0||debt<0){err.textContent='0 이상의 숫자를 입력해 주세요.';return;}
+  if(col===0){err.textContent='담보가치는 0보다 커야 LTV를 계산할 수 있습니다.';return;}
+  if(debt===0){err.textContent='연간 원리금은 0보다 커야 DSCR을 계산할 수 있습니다.';return;}
+  var ltv=loan/col*100, dscr=cf/debt;
+  document.getElementById('pLtv').textContent=fmt(ltv,1)+'%';
+  document.getElementById('pDscr').textContent=fmt(dscr,2)+'배';
+  var m=[];
+  m.push(ltv>100?'LTV가 100%를 초과합니다. 담보가치보다 대출금이 큰 상태입니다.':'LTV: 담보가치 대비 대출금 비중이 '+fmt(ltv,1)+'%입니다. 낮을수록 담보 여유가 큽니다.');
+  m.push(dscr<1?'DSCR이 1.0 미만으로, 연간 현금흐름이 원리금을 충당하지 못합니다.':(dscr<1.2?'DSCR이 1.0 이상이나 여유가 크지 않습니다.':'DSCR이 1.2 이상으로 원리금 상환 여력이 비교적 있습니다.'));
+  msg.textContent=m.join(' ');
+  out.hidden=false;
+});
+document.getElementById('pfForm').addEventListener('reset',function(){
+  document.getElementById('pErr').textContent='';document.getElementById('pOut').hidden=true;
+});
+
+/* ---------- FAQ ---------- */
+/* [category, question, answer, source] */
+var FAQ=[
+  ["주식·채권 발행 (ECM·DCM)", "IPO와 유상증자는 어떻게 다른가요?", "IPO는 비상장 기업이 처음 주식을 공개하고 상장하는 것이고, 유상증자는 신주를 추가로 발행해 자금을 조달하는 것입니다. IPO는 대규모 조달과 인지도 상승이 장점이지만 상장 심사와 공시 부담이 따릅니다. 유상증자는 부채 없이 조달할 수 있는 대신 기존 주주 지분이 희석될 수 있습니다.", "IB_서비스소개서(자금조달 방법 비교), IB 포털 FAQ"],
+  ["주식·채권 발행 (ECM·DCM)", "IPO는 어떤 순서로 진행되나요?", "주관사 선정 → 실사 → 상장예비심사(거래소) → 증권신고서 제출(금융감독원) → 수요예측·공모 → 상장 순서로 진행됩니다. 전체 소요 기간은 기업의 준비 상태에 따라 크게 달라지고, 내부 회계와 지배구조 정비가 먼저 이뤄져야 합니다.", "IB_서비스소개서(IPO 절차), IB 포털(IPO 절차)"],
+  ["주식·채권 발행 (ECM·DCM)", "회사채 금리는 어떻게 정해지고, 이자비용은 어떻게 가늠하나요?", "일반적으로 시장금리에 발행 기업의 신용도에 따른 가산금리(스프레드)가 더해지고, 공모 회사채는 수요예측 결과를 참고해 최종 금리를 확정하는 경우가 많습니다. 연간 이자비용은 '발행금액 × 표면금리'로 개략 계산하며, 예를 들어 100억 원을 연 4%로 발행하면 약 4억 원입니다(계산 방식을 보여 드리는 예시이며 실제 금리 안내가 아닙니다). 귀사에 적용될 금리 수준은 IB본부 담당자 상담으로 안내드립니다.", "IB 포털 FAQ, 자금조달_용어안내(채권 관련 용어)"],
+  ["주식·채권 발행 (ECM·DCM)", "CP는 언제 활용하고, 우리 회사에는 어떤 방법이 맞나요?", "CP는 운영자금 같은 단기 자금 수요를 신속하게 채울 때 활용합니다. 절차가 간편한 대신 만기가 짧아서 만기 때 새로 조달(차환·롤오버)해야 하는 부담을 함께 봐야 합니다. 어떤 방법이 적합한지는 자금 사용 목적, 필요 시기, 재무 구조, 신용등급에 따라 달라지므로, 귀사 상황에 맞는 판단은 IB본부 담당자 상담을 이용해 주세요.", "IB_서비스소개서(자금조달 방법 비교), IB 포털 FAQ"],
+  ["부동산 PF·유동화", "PF에서 SPC는 왜 사용하나요?", "SPC는 특정 사업만을 위해 세운 특수목적법인으로, 사업과 모기업의 신용을 분리하는 역할을 합니다. 사업 자산과 현금흐름을 한곳에 모아 대주단이 사업성 중심으로 판단할 수 있게 해 줍니다. 도산절연 여부와 자금 흐름의 투명성이 주요 점검 포인트입니다.", "IB 포털 FAQ, IB 포털(PF·유동화 구조도), 자금조달_용어안내(구조화금융 용어)"],
+  ["부동산 PF·유동화", "PF 참여자는 누구고, 책임준공 확약은 무엇인가요?", "시행사는 사업을 기획·추진하고, 시공사는 공사를 수행하며 신용 보강에 참여하기도 합니다. 대주단은 자금을 공급하고, 신탁사는 자금과 자산을 관리합니다. 책임준공 확약은 시공사 등이 정해진 기한까지 공사를 마치겠다고 약속하는 것인데, 약정 내용과 보강 수단은 계약마다 달라 개별 확인이 필요합니다.", "IB_서비스소개서(부동산 PF 구조 이해), IB 포털 FAQ"],
+  ["부동산 PF·유동화", "LTV와 DSCR은 무엇을 의미하나요?", "LTV는 '대출금 ÷ 담보가치 × 100'으로, 낮을수록 담보 여력이 큽니다. DSCR은 '연간 현금흐름 ÷ 연간 원리금'으로, 1보다 커야 상환이 가능하다는 뜻입니다. 실제 승인 기준은 금융기관과 사업마다 다르므로 개별 사업 검토는 IB본부 담당자 상담으로 안내드립니다.", "자금조달_용어안내(지표 계산 예시), IB_서비스소개서(부동산 PF 구조 이해), IB 포털(PF 지표 계산기 안내)"],
+  ["M&A·인수금융", "M&A에서 IB본부는 어떤 서비스를 제공하나요?", "인수 또는 매각을 검토하는 기업을 대상으로 인수·매각 자문, 기업가치 평가, 거래 구조 설계를 지원합니다. 인수금융 주선과 자금조달 구조 설계, 그리고 실사·협상·클로징 전 과정 지원도 포함됩니다.", "IB_서비스소개서(3대 사업 영역), IB 포털(M&A·인수금융 사업 영역)"],
+  ["M&A·인수금융", "인수금융은 무엇인가요?", "기업을 인수하는 데 필요한 자금을 금융기관이 대출 등으로 제공하는 것을 말합니다. 인수 대상 기업의 현금흐름과 자산이 상환 재원 및 담보로 활용되는 경우가 많습니다.", "IB 포털 FAQ, IB_서비스소개서(M&A·인수금융)"],
+  ["M&A·인수금융", "우리 회사의 가치나 인수금융 조건을 미리 알 수 있나요?", "기업가치 평가는 서비스 범위에 포함되지만, 개별 기업의 가치나 조달 가능 금액·조건은 일반 안내 자료로 말씀드릴 수 없습니다. 개별 기업 자문 의견과 진행 중인 거래 관련 문의는 IB본부 담당자 상담을 통해 진행해 주세요.", "IB_서비스소개서(투자 관련 고지), IB 포털(M&A·인수금융 사업 영역)"]
+];
+var faqList=document.getElementById('faqList'), faqSearch=document.getElementById('faqSearch');
+var faqCount=document.getElementById('faqCount'), faqEmpty=document.getElementById('faqEmpty'), faqAll=document.getElementById('faqAll');
+var faqCats=document.getElementById('faqCats'), faqCat='';
+var CATS=FAQ.reduce(function(a,f){if(a.indexOf(f[0])<0)a.push(f[0]);return a;},[]);
+function matchQ(f,low){return !low||f[0].toLowerCase().indexOf(low)>=0||f[1].toLowerCase().indexOf(low)>=0||f[2].toLowerCase().indexOf(low)>=0;}
+function renderCats(low){
+  var hits=FAQ.filter(function(f){return matchQ(f,low);});
+  faqCats.innerHTML=[''].concat(CATS).map(function(c){
+    var n=c?hits.filter(function(f){return f[0]===c;}).length:hits.length;
+    var on=c===faqCat;
+    return '<button type="button" class="faq-chip" data-cat="'+esc(c)+'" aria-pressed="'+on+'"'+(n===0&&!on?' disabled':'')+'>'+(c?esc(c):'전체')+'<span class="n">'+n+'</span></button>';
+  }).join('');
+}
+faqCats.addEventListener('click',function(e){
+  var b=e.target.closest('.faq-chip'); if(!b||b.disabled) return;
+  faqCat=b.getAttribute('data-cat'); renderFaq();
+  var cur=faqCats.querySelector('[aria-pressed="true"]'); if(cur) cur.focus();
+});
+function hl(text,q){
+  var s=esc(text);
+  if(!q) return s;
+  var qe=esc(q).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return s.replace(new RegExp('('+qe+')','gi'),'<mark>$1</mark>');
+}
+function renderFaq(){
+  var q=faqSearch.value.trim();
+  var low=q.toLowerCase();
+  renderCats(low);
+  var items=FAQ.filter(function(f){return matchQ(f,low)&&(!faqCat||f[0]===faqCat);});
+  var lastCat='';
+  faqList.innerHTML=items.map(function(f){
+    var head='';
+    if(f[0]!==lastCat){lastCat=f[0];head='<h3 class="faq-cat">'+esc(f[0])+'</h3>';}
+    return head+'<details class="faq"'+(q?' open':'')+'><summary>'+hl(f[1],q)+'</summary><div class="ans">'+hl(f[2],q)+'<div class="faq-src">근거: '+esc(f[3])+'</div></div></details>';
+  }).join('');
+  faqEmpty.hidden=items.length>0;
+  var label=[];
+  if(faqCat) label.push(faqCat);
+  if(q) label.push("'"+q+"' 검색");
+  faqCount.textContent=label.length?(label.join(' · ')+' 결과 '+items.length+'건'):('전체 '+FAQ.length+'건');
+  faqAll.hidden=items.length===0;
+  syncAllBtn();
+}
+function syncAllBtn(){
+  var ds=faqList.querySelectorAll('details');
+  var allOpen=ds.length>0&&[].every.call(ds,function(d){return d.open;});
+  faqAll.textContent=allOpen?'모두 접기':'모두 펼치기';
+}
+faqSearch.addEventListener('input',renderFaq);
+faqAll.addEventListener('click',function(){
+  var ds=faqList.querySelectorAll('details');
+  var allOpen=[].every.call(ds,function(d){return d.open;});
+  [].forEach.call(ds,function(d){d.open=!allOpen;});
+  syncAllBtn();
+});
+faqList.addEventListener('toggle',syncAllBtn,true);
+renderFaq();
+
+/* ---------- Download (files/ 폴더 자료) ---------- */
+[].forEach.call(document.querySelectorAll('.file-list a[download]'),function(a){
+  a.addEventListener('click',function(){toast(a.getAttribute('download')+' 다운로드를 시작합니다.');});
+});
+})();
+</script>
+</body>
+</html>
